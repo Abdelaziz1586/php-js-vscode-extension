@@ -1,0 +1,130 @@
+{
+  "Echo statement": {
+    "prefix": "echo",
+    "body": [
+      "echo \"$1\";"
+    ],
+    "description": "Echo a string"
+  },
+  "Echo variable": {
+    "prefix": "echov",
+    "body": [
+      "echo $$1;"
+    ],
+    "description": "Echo a variable"
+  },
+  "Variable declaration": {
+    "prefix": "var",
+    "body": [
+      "$$1 = $2;"
+    ],
+    "description": "Declare a variable"
+  },
+  "If statement": {
+    "prefix": "if",
+    "body": [
+      "if ($1) {",
+      "\t$2",
+      "}"
+    ],
+    "description": "If statement"
+  },
+  "If-else statement": {
+    "prefix": "ife",
+    "body": [
+      "if ($1) {",
+      "\t$2",
+      "} else {",
+      "\t$3",
+      "}"
+    ],
+    "description": "If-else statement"
+  },
+  "If-elseif-else statement": {
+    "prefix": "ifeif",
+    "body": [
+      "if ($1) {",
+      "\t$2",
+      "} elseif ($3) {",
+      "\t$4",
+      "} else {",
+      "\t$5",
+      "}"
+    ],
+    "description": "If-elseif-else statement"
+  },
+  "For loop": {
+    "prefix": "for",
+    "body": [
+      "for ($$1 = ${2:0}; $$1 ${3:<} ${4:10}; $$1++) {",
+      "\t$5",
+      "}"
+    ],
+    "description": "For loop"
+  },
+  "Foreach loop": {
+    "prefix": "foreach",
+    "body": [
+      "foreach ($$1 as $$2) {",
+      "\t$3",
+      "}"
+    ],
+    "description": "Foreach loop"
+  },
+  "While loop": {
+    "prefix": "while",
+    "body": [
+      "while ($1) {",
+      "\t$2",
+      "}"
+    ],
+    "description": "While loop"
+  },
+  "Function definition": {
+    "prefix": "function",
+    "body": [
+      "function ${1:name}(${2:\\$param}) {",
+      "\t$3",
+      "\treturn $4;",
+      "}"
+    ],
+    "description": "Define a function"
+  },
+  "Array declaration": {
+    "prefix": "arr",
+    "body": [
+      "$$1 = [$2];"
+    ],
+    "description": "Declare an array"
+  },
+  "String concatenation": {
+    "prefix": "concat",
+    "body": [
+      "$1 . $2"
+    ],
+    "description": "String concatenation"
+  },
+  "Comment line": {
+    "prefix": "//",
+    "body": [
+      "// $1"
+    ],
+    "description": "Single line comment"
+  },
+  "Comment block": {
+    "prefix": "/*",
+    "body": [
+      "/*",
+      " * $1",
+      " */"
+    ],
+    "description": "Block comment"
+  },
+  "Return statement": {
+    "prefix": "ret",
+    "body": [
+      "return $1;"
+    ],
+    "description": "Return statement"
+  }
+}

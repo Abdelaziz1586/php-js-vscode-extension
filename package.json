@@ -1,0 +1,81 @@
+{
+  "name": "phpjs",
+  "displayName": "PHP-JS",
+  "description": "Syntax highlighting, snippets, and language support for PHP-JS (.phpjs) files",
+  "version": "0.1.0",
+  "publisher": "ahmedwaleed",
+
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ahmedwaleed22/php-js"
+  },
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Snippets"
+  ],
+  "keywords": [
+    "php",
+    "javascript",
+    "phpjs",
+    "php-js",
+    "transpiler"
+  ],
+  "main": "./out/extension.js",
+  "activationEvents": [
+    "onLanguage:phpjs"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "phpjs",
+        "aliases": [
+          "PHP-JS",
+          "phpjs"
+        ],
+        "extensions": [
+          ".phpjs"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "phpjs",
+        "scopeName": "source.phpjs",
+        "path": "./syntaxes/phpjs.tmLanguage.json"
+      },
+      {
+        "scopeName": "text.html.phpjs",
+        "path": "./syntaxes/phpjs-html.tmLanguage.json",
+        "injectTo": [
+          "text.html.basic",
+          "text.html.derivative"
+        ],
+        "embeddedLanguages": {
+          "source.phpjs": "phpjs"
+        }
+      }
+    ],
+    "snippets": [
+      {
+        "language": "phpjs",
+        "path": "./snippets/phpjs.json"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "@types/vscode": "^1.74.0",
+    "typescript": "^5.0.0",
+    "@vscode/vsce": "^2.22.0"
+  }
+}
