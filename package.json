@@ -4,7 +4,6 @@
   "description": "Syntax highlighting, snippets, and language support for PHP-JS (.phpjs) files",
   "version": "0.1.0",
   "publisher": "ahmedwaleed",
-
   "repository": {
     "type": "git",
     "url": "https://github.com/Ahmedwaleed22/php-js"
@@ -64,7 +63,29 @@
         "language": "phpjs",
         "path": "./snippets/phpjs.json"
       }
-    ]
+    ],
+    "commands": [
+      {
+        "command": "phpjs.run",
+        "title": "PHP-JS: Run PHP-JS",
+        "category": "PHP-JS"
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "command": "phpjs.run",
+          "group": "navigation",
+          "when": "resourceExtname == .phpjs"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "phpjs.run",
+          "when": "resourceExtname == .phpjs"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",

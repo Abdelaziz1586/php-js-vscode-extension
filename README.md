@@ -13,79 +13,48 @@ Syntax highlighting, snippets, and language support for PHP-JS (`.phpjs`) files.
 - Operators (arithmetic, comparison, logical, string concatenation)
 - Built-in functions
 
+### Execution Engine (NEW)
+- **Lexer-based Interpreter**: A robust and fast Lexer/Parser/Interpreter replaces the previous regex-based approach.
+- **Run PHP-JS Command**: Directly run your `.phpjs` files within VS Code.
+- **Built-in Functions**: Support for `strlen`, `count`, `strtoupper`, `strtolower`, `trim`, etc.
+
 ### HTML Integration
 Syntax highlighting for PHP-JS code inside `<script type="text/phpjs">` tags in HTML files.
 
-### Snippets
-Quick code snippets for common patterns:
-
-| Prefix | Description |
-|--------|-------------|
-| `echo` | Echo a string |
-| `echov` | Echo a variable |
-| `var` | Declare a variable |
-| `if` | If statement |
-| `ife` | If-else statement |
-| `ifeif` | If-elseif-else statement |
-| `for` | For loop |
-| `foreach` | Foreach loop |
-| `while` | While loop |
-| `function` | Function definition |
-| `arr` | Array declaration |
-| `ret` | Return statement |
+... (snippets table) ...
 
 ### IntelliSense
 - Auto-completion for keywords and built-in functions
 - Hover documentation for keywords and functions
 
-## Installation
-
-### From VSIX (Local Installation)
-1. Build the extension:
-   ```bash
-   cd vscode-phpjs
-   npm install
-   npm run compile
-   npm run package
-   ```
-
-2. Install the generated `.vsix` file:
-   - Open VS Code
-   - Press `Ctrl+Shift+P` (or `Cmd+Shift+P` on Mac)
-   - Type "Install from VSIX"
-   - Select the generated `phpjs-0.1.0.vsix` file
-
-### Development Mode
-1. Open the `vscode-phpjs` folder in VS Code
-2. Press `F5` to launch the Extension Development Host
-3. Open a `.phpjs` file to test the extension
-
 ## Usage
 
+### Running PHP-JS Code
+1. Open a `.phpjs` file.
+2. Click the **Play** icon in the editor title bar OR press `Ctrl+Shift+P` and type `PHP-JS: Run PHP-JS`.
+3. View the output in the **PHP-JS Output** channel.
+
 ### .phpjs Files
-Create files with the `.phpjs` extension to get automatic syntax highlighting:
+Create files with the `.phpjs` extension:
 
 ```phpjs
-// greet.phpjs
-function greet($name) {
-  return "Hello, " . $name;
+// math.phpjs
+function add($a, $b) {
+  return $a + $b;
 }
 
-$message = greet("World");
-echo $message;
+$x = 10;
+$y = 20;
+$sum = add($x, $y);
+echo "The sum is: " . $sum; // Output: The sum is: 30
 ```
 
-### HTML Files
-Use `<script type="text/phpjs">` tags in HTML for embedded PHP-JS code:
-
-```html
-<script type="text/phpjs">
-  $fruits = ["apple", "banana", "orange"];
-  foreach ($fruits as $fruit) {
-    echo $fruit . "<br />";
-  }
-</script>
-```
+### Supported Features
+- **Variables**: Start with `$`.
+- **Functions**: Defined with `function`.
+- **Flow Control**: `if`, `elseif`, `else`, `while`, `for`.
+- **Echo**: Use `echo` to print to the output channel.
+- **Strings**: Use `.` for concatenation (PHP style).
 
 ## Development
 

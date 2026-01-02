@@ -1,12 +1,51 @@
 import * as vscode from 'vscode';
+import { Lexer } from './lexer';
+import { Parser } from './parser';
+import { Interpreter } from './interpreter';
 
 export function activate(context: vscode.ExtensionContext) {
   console.log('PHP-JS extension is now active!');
 
+  const outputChannel = vscode.window.createOutputChannel("PHP-JS Output");
+
+  // Register command to run PHP-JS
+  let runCommand = vscode.commands.registerCommand('phpjs.run', () => {
+    const editor = vscode.window.activeTextEditor;
+    if (!editor) {
+      vscode.window.showErrorMessage("No active editor found.");
+      return;
+    }
+
+    const source = editor.document.getText();
+    outputChannel.clear();
+    outputChannel.show(true);
+
+    try {
+      const lexer = new Lexer(source);
+      const tokens = lexer.scanTokens();
+
+      const parser = new Parser(tokens);
+      const statements = parser.parse();
+
+      const interpreter = new Interpreter();
+      const result = interpreter.interpret(statements);
+
+      outputChannel.appendLine("--- PHP-JS Execution Result ---");
+      outputChannel.append(result);
+      outputChannel.appendLine("\n--- Execution Finished ---");
+    } catch (error: any) {
+      outputChannel.appendLine(`--- PHP-JS Error ---`);
+      outputChannel.appendLine(error.message);
+    }
+  });
+
+  context.subscriptions.push(runCommand);
+
   // Register a hover provider for PHP-JS
   const hoverProvider = vscode.languages.registerHoverProvider('phpjs', {
-    provideHover(document, position, token) {
+    provideHover(document: vscode.TextDocument, position: vscode.Position, token: vscode.CancellationToken) {
       const range = document.getWordRangeAtPosition(position);
+      if (!range) return null;
       const word = document.getText(range);
 
       // Provide hover info for built-in functions
@@ -48,7 +87,7 @@ export function activate(context: vscode.ExtensionContext) {
 
   // Register a completion provider for PHP-JS
   const completionProvider = vscode.languages.registerCompletionItemProvider('phpjs', {
-    provideCompletionItems(document, position, token, context) {
+    provideCompletionItems(document: vscode.TextDocument, position: vscode.Position, token: vscode.CancellationToken, context: vscode.CompletionContext) {
       const completions: vscode.CompletionItem[] = [];
 
       // Keywords
@@ -80,4 +119,4 @@ export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(completionProvider);
 }
 
-export function deactivate() {}
+export function deactivate() { }
